@@ -1,0 +1,127 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":separateMultipleMajorReleases",
+    ":enableVulnerabilityAlertsWithLabel(security)"
+  ],
+  "timezone": "Europe/London",
+  "minimumReleaseAge": "21 days",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 4,
+  "internalChecksFilter": "strict",
+  "rebaseWhen": "behind-base-branch",
+  "configMigration": true,
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "assignees": ["eddgrant"],
+
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 9am on the first day of the month"],
+    "minimumReleaseAge": null
+  },
+
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "minimumReleaseAge": null
+  },
+
+  "packageRules": [
+    {
+      "description": "Group Kotlin stdlib, KSP, KAPT and Kover — they release together",
+      "matchPackageNames": [
+        "/^org\\.jetbrains\\.kotlin/",
+        "/^com\\.google\\.devtools\\.ksp/",
+        "/^org\\.jetbrains\\.kotlinx\\.kover/"
+      ],
+      "groupName": "Kotlin"
+    },
+    {
+      "description": "Gradle wrapper updates kept separate from Kotlin",
+      "matchManagers": ["gradle-wrapper"],
+      "groupName": "Gradle wrapper"
+    },
+    {
+      "description": "Group all Micronaut packages — Micronaut releases as a coherent train",
+      "matchPackageNames": ["/^io\\.micronaut/"],
+      "groupName": "Micronaut"
+    },
+    {
+      "description": "Group Next.js with React and its types",
+      "matchPackageNames": [
+        "next",
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "eslint-config-next"
+      ],
+      "groupName": "Next.js + React"
+    },
+    {
+      "description": "Group TypeScript and its compiler/runner ecosystem",
+      "matchPackageNames": ["typescript", "ts-node", "tsx", "@types/node"],
+      "groupName": "TypeScript"
+    },
+    {
+      "description": "Group ESLint, Prettier and TypeScript-ESLint tooling",
+      "matchPackageNames": [
+        "eslint",
+        "prettier",
+        "/^@typescript-eslint/",
+        "/^eslint-/"
+      ],
+      "groupName": "JS lint tooling"
+    },
+    {
+      "description": "Group all Terraform providers",
+      "matchDatasources": ["terraform-provider"],
+      "groupName": "Terraform providers"
+    },
+    {
+      "description": "Group all Terraform modules",
+      "matchDatasources": ["terraform-module"],
+      "groupName": "Terraform modules"
+    },
+    {
+      "description": "Group all GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Group Docker base image digest pins",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["digest", "pin"],
+      "groupName": "Docker digest pins"
+    },
+    {
+      "description": "Group non-major dev dependencies (npm)",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "non-major dev dependencies"
+    },
+    {
+      "description": "Group non-major Python dev dependencies",
+      "matchManagers": ["pip_requirements", "pep621", "poetry", "pipenv"],
+      "matchDepTypes": ["dev-dependencies", "dev"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "non-major Python dev dependencies"
+    },
+    {
+      "description": "Hold Go module majors a bit longer",
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    },
+    {
+      "description": "Hold Ruby/Jekyll majors a bit longer",
+      "matchManagers": ["bundler"],
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    }
+  ]
+}
