@@ -31,11 +31,10 @@
 
   "packageRules": [
     {
-      "description": "Group Kotlin stdlib, KSP, KAPT and Kover — they release together",
+      "description": "Group Kotlin compiler, stdlib, gradle plugins and KSP. The [:.] guard keeps kotlinx packages out — they have their own group.",
       "matchPackageNames": [
-        "/^org\\.jetbrains\\.kotlin/",
-        "/^com\\.google\\.devtools\\.ksp/",
-        "/^org\\.jetbrains\\.kotlinx\\.kover/"
+        "/^org\\.jetbrains\\.kotlin[:.]/",
+        "/^com\\.google\\.devtools\\.ksp/"
       ],
       "groupName": "Kotlin"
     },
@@ -48,6 +47,21 @@
       "description": "Group all Micronaut packages — Micronaut releases as a coherent train",
       "matchPackageNames": ["/^io\\.micronaut/"],
       "groupName": "Micronaut"
+    },
+    {
+      "description": "Group Kotest assertions, runners and extensions",
+      "matchPackageNames": ["/^io\\.kotest/"],
+      "groupName": "Kotest"
+    },
+    {
+      "description": "Group kotlinx coroutines / serialization / datetime / other JetBrains kotlinx libraries",
+      "matchPackageNames": ["/^org\\.jetbrains\\.kotlinx/"],
+      "groupName": "kotlinx"
+    },
+    {
+      "description": "Group Backstage packages — releases ship as a coherent platform version",
+      "matchPackageNames": ["/^@backstage\\//"],
+      "groupName": "Backstage"
     },
     {
       "description": "Group Next.js with React and its types",

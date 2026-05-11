@@ -34,9 +34,12 @@ Coherent release trains and tightly-coupled packages are batched into one PR eac
 
 | Group | What it covers |
 |---|---|
-| **Kotlin** | `org.jetbrains.kotlin*`, `com.google.devtools.ksp*`, Kover |
+| **Kotlin** | `org.jetbrains.kotlin:*` and `org.jetbrains.kotlin.*` (compiler, stdlib, gradle plugins) plus `com.google.devtools.ksp*` |
+| **kotlinx** | All `org.jetbrains.kotlinx:*` (coroutines, serialization, datetime, Kover, etc.) |
+| **Kotest** | All `io.kotest:*` |
 | **Gradle wrapper** | The `gradle-wrapper` manager |
 | **Micronaut** | All `io.micronaut*` packages |
+| **Backstage** | All `@backstage/*` npm packages |
 | **Next.js + React** | `next`, `react`, `react-dom`, `@types/react*`, `eslint-config-next` |
 | **TypeScript** | `typescript`, `ts-node`, `tsx`, `@types/node` |
 | **JS lint tooling** | `eslint`, `prettier`, `@typescript-eslint/*`, `eslint-*` |
