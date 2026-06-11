@@ -12,6 +12,7 @@
   "prHourlyLimit": 4,
   "internalChecksFilter": "strict",
   "rebaseWhen": "behind-base-branch",
+  "automergeStrategy": "rebase",
   "configMigration": true,
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
@@ -20,6 +21,7 @@
 
   "lockFileMaintenance": {
     "enabled": true,
+    "automerge": true,
     "schedule": ["before 9am on the first day of the month"],
     "minimumReleaseAge": null
   },
@@ -30,6 +32,11 @@
   },
 
   "packageRules": [
+    {
+      "description": "Automerge non-major updates once CI passes. Majors always get a manual PR. Repos without CI opt out in their own renovate.json.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "bump"],
+      "automerge": true
+    },
     {
       "description": "Group Kotlin compiler, stdlib, gradle plugins and KSP. The [:.] guard keeps kotlinx packages out — they have their own group.",
       "matchPackageNames": [
